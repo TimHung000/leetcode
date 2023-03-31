@@ -86,7 +86,7 @@ class Solution {
 
 int main(int argc, char** argv) {
     Solution sol;
-    std::string test2 = "tmmzuxt";
-    std::cout << sol.lengthOfLongestSubstring2(test2) << std::endl;
+    std::string test2 = "abba";
+    std::cout << sol.lengthOfLongestSubstring1(test2) << std::endl;
     return 0;
 }
