@@ -5,7 +5,7 @@ class Solution {
 public:
     int subarraySum(std::vector<int>& nums, int k) {
         std::unordered_map<int,int> prefixSum;
-        int curSum = 0,
+        int curSum = 0;
         int res = 0;
         prefixSum[curSum] = 1;
         for(auto it:nums){

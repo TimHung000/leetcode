@@ -1,22 +1,29 @@
+#include <vector>
+#include <algorithm>
+
 class Solution {
 public:
     int removeDuplicates(std::vector<int>& nums) {
-        int i = 0;
-        for(int n : nums) {
-            if(!i || n > nums[i-1])
-                nums[i++] = n;
+        int l = 0, r = 0;
+        while(r < nums.size()) {
+            if(nums[l] == nums[r]) {
+                ++r;
+            } else {
+                ++l;
+                nums[l] = nums[r];
+            }
         }
-        return i;
+        return l + 1;
     }
 
-    int removeDuplicates(std::vector<int>& nums) {
+    int removeDuplicates1(std::vector<int>& nums) {
         int count = 0;
         auto it = std::unique(nums.begin(), nums.end());
         nums.erase(it, nums.end());
         return nums.size();
     }
 
-    int removeDuplicates(std::vector<int>& nums) {
+    int removeDuplicates2(std::vector<int>& nums) {
         if(nums.size() == 0)
             return 0;
         if(nums.size() == 1)
@@ -29,18 +36,4 @@ public:
         }
         return nums.size();
     }
-
-    int removeDuplicates(std::vector<int>& nums) {
-        if(!nums.size())
-            return 0;
-        int ptr = 0;
-        for(int i = 1; i < nums.size(); ++i) {
-            if(nums[ptr] != nums[i]) {
-                ++ptr;
-                nums[ptr] = nums[i];
-            }
-        }
-        return ptr+1;
-    }
-
 };
