@@ -22,14 +22,14 @@ public:
     // time complexity (n)
     int MaxArea1(std::vector<int>& height) {
         int res =0;
-        int start = 0;
-        int end = height.size() - 1;
-        while(start < end) {
-            res = std::max(res, (end - start) *std::min(height[start], height[end]));
-            if(height[start] < height[end])
-                start++;
+        int l = 0;
+        int r = height.size() - 1;
+        while(l < r) {
+            res = std::max(res, (r - l) * std::min(height[l], height[r]));
+            if(height[l] < height[r])
+                ++l;
             else
-                end--;
+                --r;
         }
         return res;
     }

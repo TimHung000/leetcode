@@ -5,35 +5,6 @@
 class Solution {
     public:
         int lengthOfLongestSubstring(std::string s) {
-            int currentLength = 0;
-            int longestLength = 0;
-            int currentStart = 0;
-            int start = 0;
-            int end = 0;
-            std::unordered_map<char, int> umap;
-            int size = s.size();
-            for(int i = 0; i < size; ++i) {
-                std::unordered_map<char, int>::iterator it = umap.find(s[i]);
-                if(it == umap.end()) {
-                    ++currentLength;
-                    umap.insert(std::pair<char, int>(s[i], i));
-                    if(currentLength > longestLength) {
-                        longestLength = currentLength;
-                        end = i;
-                        start = currentStart;
-                    }
-                }
-                else {
-                    currentLength = 0;
-                    currentStart = it->second + 1;
-                    i = it->second;
-                    umap.clear();
-                }
-            }
-            return longestLength;
-        }
-
-        int lengthOfLongestSubstring1(std::string s) {
             std::unordered_map<char, int> umap;
             size_t size = s.size();
             size_t start = 0;
@@ -87,6 +58,6 @@ class Solution {
 int main(int argc, char** argv) {
     Solution sol;
     std::string test2 = "abba";
-    std::cout << sol.lengthOfLongestSubstring1(test2) << std::endl;
+    std::cout << sol.lengthOfLongestSubstring(test2) << std::endl;
     return 0;
 }
