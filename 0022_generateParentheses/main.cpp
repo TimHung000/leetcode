@@ -2,30 +2,54 @@
 #include <vector>
 
 class Solution {
+private:
+    void helper(std::vector<std::string>& res, std::string& s, int open, int close, int n) {
+        if(open == n && close == n) {
+            res.push_back(s);
+        }
+
+        if(open < n) {
+            s.push_back('(');
+            helper(res, s, open + 1, close, n);
+            s.pop_back();
+        }
+
+        if(close < open) {
+            s.push_back(')');
+            helper(res, s, open, close + 1, n);
+            s.pop_back();
+        }
+    }
 public:
     // backtracking
     std::vector<std::string> generateParenthesis(int n) {
         std::vector<std::string> res;
         std::string s;
-
         helper(res, s, 0, 0, n);
         return res;
     }
-    // dynamic programming
-    // catalan numbers
-    // https://www.youtube.com/watch?v=PBt1gB9Ou9E
-    // https://www.youtube.com/watch?v=QdcujZTp_8M
-    // https://www.youtube.com/watch?v=m9Khxn2g-6w
-    // f(n) is a function which has the set of n matched parantheses
-    // f(0) = ''
-    // f(1) = (f(0))f(0)
-    // f(2) = (f(0))f(1), (f(1))f(0)
-    // f(3) = (f(0))f(2), (f(1))f(1), (f(2))f(0)
-    std::vector<std::string> generateParenthesis(int n) {
-        std::vector<std::vector<string>> dp(n+1);
+
+    // dp
+    std::vector<std::string> generateParenthesis1(int n) {
+        // dp[i] contains all the valid parenthesis pobbible of length 2*i
+        /*
+            dp[2] = {(()), ()()}
+            dp[3] =
+            ( + dp[0] + ) + dp[2] = ()(()) and ()()()
+            ( + dp[1] + ) + dp[1] = (())()
+            ( + dp[2] + ) + dp[0] = ((())) and (()())
+        **/
+        std::vector<std::vector<std::string>> dp(n+1);
         dp[0] = {""};
-        for(int i = 1; i <=n; ++i) {
+        for(int i = 1; i <= n; ++i) {
             for(int j = 0; j < i; ++j) {
+                // std::vector<std::string> left = dp[j];
+                // std::vector<std::string> right = dp[i-j-1];
+                // for(int k = 0; k < left.size(); ++k) {
+                //     for(int l = 0; l < right.size(); ++l) {
+                //         dp[i].push_back('(' + left[k] + ')' + right[l]);
+                //     }
+                // }
                 for(int k = 0; k < dp[j].size(); ++k) {
                     for(int l = 0; l < dp[i-j-1].size(); ++l) {
                         std::string s = '(' + dp[j][k] + ')' + dp[i-j-1][l];
@@ -35,26 +59,6 @@ public:
             }
         }
         return dp[n];
-    }
-
-private:
-    void helper(std::vector<std::string>& res, std::string& s, int openC, int closeC, int n) {
-        if(openC == n && closeC == n) {
-            res.push_back(s);
-        }
-
-        if(openC < n) {
-            s.push_back('(');
-            helper(res, s, openC + 1, closeC, n);
-            s.pop_back();
-        }
-
-        if(closeC < openC) {
-            s.push_back(')');
-            helper(res, s, openC, closeC + 1, n);
-            s.pop_back();
-        }
-
     }
 };
 
