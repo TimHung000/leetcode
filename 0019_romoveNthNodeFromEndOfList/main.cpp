@@ -25,28 +25,4 @@ public:
         delete target;
         return head;
     }
-
-    ListNode* removeNthFromEnd(ListNode* head, int n) {
-        ListNode* slow = head;
-        ListNode* fast = head;
-        for(int i = 0; i < n; ++i)
-            fast = fast->next;
-
-        if(!fast) {
-            ListNode* tmp = head;
-            head = head->next;
-            delete tmp;
-            return head;
-        }
-
-        while(fast->next) {
-            slow = slow->next;
-            fast = fast->next;
-        }
-
-        ListNode* tmp = slow->next;
-        slow->next = tmp->next;
-        delete tmp;
-        return head;
-    }
 };
