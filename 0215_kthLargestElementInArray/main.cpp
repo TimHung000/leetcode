@@ -1,14 +1,24 @@
 #include <algorithm>
 #include <vector>
 #include <iostream>
+#include <queue>
+#include <functional>
 
 class Solution {
 public:
     int findKthLargest(std::vector<int>& nums, int k) {
-        sort(nums.begin(), nums.end());
-        return nums.at(nums.size()-k);
+        std::priority_queue<int, std::vector<int>, std::greater<int>> minHeap;
+        for(int i = 0; i < nums.size(); ++i) {
+            minHeap.push(nums[i]);
+            if (i >= k)
+                minHeap.pop();
+        }
+        return minHeap.top();
     }
+};
 
+class Solution1 {
+public:
     int findKthLargest1(std::vector<int>& nums, int k) {
         int start = 0;
         int end = nums.size() - 1;
@@ -47,18 +57,3 @@ public:
 
     }
 };
-
-int main(int argc, char* argv[]) {
-    std::vector<int> test_case {5,4,3,6,7,9,10,5,4,5};
-    Solution sol;
-    std::cout << sol.findKthLargest1(test_case, 1) << std::endl;
-    std::cout << sol.findKthLargest1(test_case, 2) << std::endl;
-    std::cout << sol.findKthLargest1(test_case, 3) << std::endl;
-    std::cout << sol.findKthLargest1(test_case, 4) << std::endl;
-    std::cout << sol.findKthLargest1(test_case, 5) << std::endl;
-    std::cout << sol.findKthLargest1(test_case, 6) << std::endl;
-    std::cout << sol.findKthLargest1(test_case, 7) << std::endl;
-    std::cout << sol.findKthLargest1(test_case, 8) << std::endl;
-    std::cout << sol.findKthLargest1(test_case, 9) << std::endl;
-    std::cout << sol.findKthLargest1(test_case, 10) << std::endl;
-}
