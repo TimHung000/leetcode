@@ -47,4 +47,3 @@ class Solution1:
         backtrack(0, target, [])
         return res    
 
-Solution1().combinationSum2([2,5,2,1,2], 5)

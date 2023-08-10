@@ -3,21 +3,32 @@
 class Solution {
 public:
     int maxTurbulenceSize(std::vector<int>& arr) {
-        int inc = 1;
-        int dec = 1;
+        int l = 0;
+        int r = 1;
         int res = 1;
-        for(int i = 1; i < arr.size(); ++i) {
-            if(arr[i] > arr[i-1]) {
-                inc = dec + 1;
-                dec = 1;
-            } else if(arr[i] < arr[i-1]) {
-                dec = inc + 1;
-                inc = 1;
+        char prev = ' ';
+        while(r < arr.size()) {
+            if(arr[r-1] > arr[r] && prev != '>') {
+                res = std::max(res, r-l+1);
+                ++r;
+                prev = '>';
+            } else if(arr[r-1] < arr[r] && prev != '<') {
+                res = std::max(res, r-l+1);
+                ++r;
+                prev = '<';
             } else {
-                inc = dec = 1;
+                if(arr[r] == arr[r-1])
+                    ++r;
+                l = r - 1;
+                prev = ' ';                    
             }
-            res = std::max(res, std::max(dec, inc));
         }
         return res;
     }
 };
+
+int main() {
+    std::vector<int> arr {9, 9};
+    Solution().maxTurbulenceSize(arr);
+    return 0;
+}

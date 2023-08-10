@@ -23,18 +23,25 @@ class Solution:
             cur_direction = tmp_direction
             max_length = max(max_length, cur_length)
         return max_length
-    
-    def maxTurbulenceSize1(self, arr: List[int]) -> int:
-        inc, dec, res = 1, 1, 1
-        for i in range(1, len(arr)):
-            if(arr[i] > arr[i-1]):
-                inc = dec + 1
-                dec = 1
-            elif(arr[i] < arr[i-1]):
-                dec = inc + 1
-                inc = 1
+
+class Solution1:
+    def maxTurbulenceSize(self, arr: List[int]) -> int:
+        l, r = 0, 1
+        res, prevSign = 1, ""
+        while r < len(arr):
+            if arr[r-1] > arr[r] and prevSign != ">":
+                res = max(res, r - l + 1)
+                r += 1
+                prevSign = ">"
+            elif arr[r-1] < arr[r] and prevSign != "<":
+                res = max(res, r - l + 1)
+                r += 1
+                prevSign = "<"
             else:
-                inc = 1
-                dec = 1
-            res = max(res, max(dec, inc))
+                r = r + 1 if arr[r] == arr[r-1] else r
+                l = r - 1
+                prevSign = ""
         return res
+
+Solution1().maxTurbulenceSize([9,4,2,10,7,8,8,1,9])
+
