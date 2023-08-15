@@ -11,7 +11,6 @@ public:
                 return 0;
             res = res * 10 + remainder;
             x /= 10;
-            std::cout << res << std::endl;
         }
         return res;
     }
