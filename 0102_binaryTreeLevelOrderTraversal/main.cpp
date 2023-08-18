@@ -14,43 +14,8 @@ struct TreeNode {
 
 class Solution {
 public:
-
-    vector<vector<int>> levelOrder(TreeNode* root) {
-        std::queue<std::pair<struct TreeNode*, int>> myQueue;
-        std::vector<std::vector<int>> res;
-        std::vector<int> subRes;
-        struct TreeNode* curPtr;
-        int curLevel = 0;
-        int level = 0;
-
-        if(root) {
-            myQueue.push(std::make_pair(root, curLevel));
-            while(!myQueue.empty()) {
-                curPtr = myQueue.front().first;
-                curLevel = myQueue.front().second;
-                myQueue.pop();
-
-                if(curPtr->left)
-                    myQueue.push(std::make_pair(curPtr->left, curLevel + 1));
-                if(curPtr->right)
-                    myQueue.push(std::make_pair(curPtr->right, curLevel + 1));
-
-                if(curLevel != level) {
-                    res.push_back(subRes);
-                    subRes.clear();
-                    ++level;
-                }
-
-                subRes.push_back(curPtr->val);
-            }
-            res.push_back(subRes);
-        }
-
-        return res;
-    }
-
     // BFS Implementation
-    vector<vector<int>> levelOrde1(TreeNode* root) {
+    vector<vector<int>> levelOrder(TreeNode* root) {
 
         if(!root)
             return std::vector<vector<int>>();
