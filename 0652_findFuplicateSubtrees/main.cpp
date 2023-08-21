@@ -20,7 +20,7 @@ private:
 
         std::string left = serializeSubtrees(node->left, subtree, res);
         std::string right = serializeSubtrees(node->right, subtree, res);
-        std::string s = std::to_string(node->val) + left + "," + right;
+        std::string s = std::to_string(node->val) + "," + left + "," + right;
 
         if(subtree[s] == 1)
             res.push_back(node);
