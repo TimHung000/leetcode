@@ -1,19 +1,17 @@
-#include <bits/stdc++.h>
-
-using namespace std;
+#include <string>
+#include <vector>
 
 class Solution {
 public:
-    int numDecodings(string s) {
+    int numDecodings(std::string s) {
         int res = 0;
         helper(s, 0, res);
         return res;
     }
 private:
-    void helper(string& s, int index, int& res)
+    void helper(std::string& s, int index, int& res)
     {
-        if(index >= s.size())
-        {
+        if(index >= s.size()) {
             ++res;
             return;
         }
@@ -21,8 +19,7 @@ private:
         if(oneDigit >= 1 && oneDigit <= 9 )
             helper(s, index + 1, res);
         
-        if(index + 1 < s.size())
-        {
+        if(index + 1 < s.size()) {
             int twoDigit = (s[index] - '0') * 10 + s[index+1] - '0';
             if(twoDigit >= 10 && twoDigit <= 26)
                 helper(s, index + 2, res);
@@ -32,18 +29,19 @@ private:
 
 class Solution1 {
 public:
-    int numDecodings(string s) {
+    int numDecodings(std::string s) {
         if(s.size() == 0 || s[0] == '0')
             return 0;
-        vector<int> dp(s.size(), -1);
+        std::vector<int> dp(s.size(), -1);
         int res = helper(s, 0, dp);
         return res;
     }
 private:
-    int helper(string& s, int index, vector<int>& dp)
+    int helper(std::string& s, int index, std::vector<int>& dp)
     {
         if(index >= s.size())
             return 1;
+            
         if(dp[index] != -1)
             return dp[index];
         
