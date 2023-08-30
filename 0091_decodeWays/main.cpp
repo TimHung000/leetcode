@@ -41,7 +41,7 @@ private:
     {
         if(index >= s.size())
             return 1;
-            
+
         if(dp[index] != -1)
             return dp[index];
         
@@ -63,10 +63,10 @@ private:
 
 class Solution2 {
 public:
-    int numDecodings(string s) {
+    int numDecodings(std::string s) {
         if(s.size() == 0)
             return 0;
-        vector<int> dp(s.size()+1, 0);
+        std::vector<int> dp(s.size()+1, 0);
         dp[0] = 1;
         dp[1] = s[0] != '0' ? 1 : 0;
         int twoDigits;
@@ -81,10 +81,3 @@ public:
         return dp[s.size()];
     }
 };
-
-int main()
-{
-    Solution1 sol;
-    sol.numDecodings("12");
-    return 0;
-}
