@@ -6,10 +6,8 @@ using namespace std;
 class Solution {
 public:
     bool exist(vector<vector<char>>& board, string word) {
-        for(int i = 0; i < board.size(); ++i)
-        {
-            for(int j = 0; j < board[i].size(); ++j)
-            {
+        for(int i = 0; i < board.size(); ++i) {
+            for(int j = 0; j < board[i].size(); ++j) {
                 if(helper(board, word, 0, i, j))
                     return true;
             }
@@ -17,8 +15,7 @@ public:
         return false;
     }
 
-    bool helper(vector<vector<char>>& board, string word, int currentIdx, int currentRow, int currentCol)
-    {
+    bool helper(vector<vector<char>>& board, string word, int currentIdx, int currentRow, int currentCol) {
         // match all char
         if(currentIdx == word.size())
             return true;

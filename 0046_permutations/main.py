@@ -25,7 +25,7 @@ class Solution1:
         if len(nums) <= 1:
             return [nums]
 
-        ans = []
+        res = []
         queue = deque([([], nums)])
 
         while queue:
@@ -38,8 +38,8 @@ class Solution1:
                 if next_options:
                     queue.append((new_arr, next_options))
                 else:
-                    ans.append(new_arr)
-        return ans
+                    res.append(new_arr)
+        return res
 
 class Solution2:
     def permute(self, nums: List[int]) -> List[List[int]]:
