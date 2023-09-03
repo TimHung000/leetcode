@@ -1,5 +1,6 @@
 #include <vector>
 #include <string>
+#include <queue>
 
 class Solution {
 public:
@@ -33,7 +34,10 @@ public:
         }
         return res;
     }
+};
 
+class Solution1 {
+public:
     std::vector<std::string> letterCombinations(std::string digits) {
         if(digits.empty())
             return {};
@@ -51,7 +55,7 @@ public:
         };
 
         std::vector<std::string> res;
-        std::queue<std::string, std::list<std::string>> myQueue({""});
+        std::queue<std::string> myQueue({""});
 
         while(!myQueue.empty()) {
             std::string curString = myQueue.front();
@@ -66,7 +70,5 @@ public:
             }
         }
         return res;
-
     }
-
 };

@@ -7,7 +7,6 @@ class Solution:
 
         if sum(matchsticks) / 4 != length:
             return False
-        
         matchsticks.sort(reverse=True)
 
         def backtrack(idx):
@@ -21,3 +20,5 @@ class Solution:
                         return True
                     sides[i] -= matchsticks[idx]
             return False
+        
+        return backtrack(0)
