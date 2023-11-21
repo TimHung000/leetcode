@@ -1,3 +1,6 @@
+
+#include <string>
+
 //time complexity : O(n*m)
 class Solution {
 public:
@@ -32,7 +35,7 @@ public:
         }
         return -1;
     }
-}
+};
 
 /*
  * https://www.youtube.com/watch?v=JoF0Z7nVSrA&t=28s
@@ -53,7 +56,7 @@ public:
         int i = 1;
         while(i < needle.size()) {
             if(needle[i] == needle[prevLPS]) {
-                lps[i] = prevLPS + 1;
+                lps[i] = lps[prevLPS] + 1;
                 prevLPS += 1;
                 i += 1;
             }
@@ -84,8 +87,9 @@ public:
             if(j == needle.size()) {
                 delete[] lps;
                 return i-needle.size();
+            }
         }
         delete[] lps;
         return -1;
     }
-}
+};
