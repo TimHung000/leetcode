@@ -11,6 +11,6 @@ public:
             else if(open > 0)
                 --open;
         }
-        return (open+1) / 2;
+        return (open+1) / 2; 
     }
 };
