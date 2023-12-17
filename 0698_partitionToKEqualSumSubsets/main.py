@@ -1,4 +1,7 @@
 from typing import List
+
+
+
 class Solution:
     def canPartitionKSubsets(self, nums: List[int], k: int) -> bool:
         total = sum(nums)
@@ -30,8 +33,9 @@ class Solution:
                         break
             return False
         return backtrack(0)
-    
-class Solution:
+
+# time limit exceeded  
+class Solution2:
     def canPartitionKSubsets(self, nums: List[int], k: int) -> bool:
         total = sum(nums)
         if len(nums) < k or total % k:
@@ -58,3 +62,30 @@ class Solution:
                     selected[j] = False
             return False
         return backtrack(0, k, 0)
+
+# time limit exceeded
+class Solution3:
+    def canPartitionKSubsets(self, nums: List[int], k: int) -> bool:
+        total = sum(nums)
+        if total % k:
+            return False
+        target = total // k
+        used = [False for _ in range(len(nums))]
+        
+        def dfs(startIdx, curSum, k):
+            if k == 0:
+                return True
+            if curSum > target:
+                return False
+            if curSum == target:
+                return dfs(0, 0, k-1)
+
+            for i in range(startIdx, len(nums)):
+                if not used[i]:
+                    used[i] = True
+                    if dfs(i + 1, curSum + nums[i], k):
+                        return True
+                    used[i] = False
+            return False
+
+        return dfs(0, 0, k)
